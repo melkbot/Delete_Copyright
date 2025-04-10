@@ -1,11 +1,11 @@
 #NoEnv  ; Recommended for performance and compatibility with future AutoHotkey releases.
 SendMode Input  ; Recommended for new scripts due to its superior speed and reliability.
 
-MsgBox, Script is running! Press F1 to start, Ctrl+P to pause, and Esc to exit. ; Confirm script is running
+MsgBox, Script is running! Press Ctrl+J to start, Ctrl+P to pause, and Esc to exit. ; Confirm script is running
 
 Pause := false ; Variable to track pause state
 
-F1:: ; Press F1 to start the loop
+^j:: ; Press Ctrl+J to start the loop
     Loop
     {
         if (Pause) ; Check if the script is paused
