@@ -1,21 +1,27 @@
-#Persistent
-#SingleInstance Force
+#NoEnv  ; Recommended for performance and compatibility with future AutoHotkey releases.
+SendMode Input  ; Recommended for new scripts due to its superior speed and reliability.
 
-toggle := false ; Variable to track start/pause state
+Pause := false ; Variable to track pause state
 
-^p:: ; Ctrl + P to toggle start/pause
-toggle := !toggle
+F1:: ; Press F1 to start the loop
+    Loop
+    {
+        if (Pause) ; Check if the script is paused
+            Sleep, 100 ; Wait while paused
+        else
+        {
+            Click ; Perform a left mouse click
+            Send, {Delete} ; Press the Delete key
+            Send, {Right} ; Press the Right Arrow key
+            Sleep, 100 ; Add a small delay to avoid overwhelming the system
+        }
+    }
 return
 
-Esc::ExitApp ; Escape to exit the script
+^p:: ; Press Ctrl+P to toggle pause
+    Pause := !Pause ; Toggle the pause state
+return
 
-Loop {
-    if (!toggle) {
-        Sleep, 100 ; Pause the loop if not toggled on
-        continue
-    }
-    Click ; Simulate left mouse click
-    Send, {Del} ; Simulate Delete key press
-    Send, {Right} ; Simulate Right Arrow key press
-    Sleep, 100 ; Add a small delay to prevent excessive speed
-}
+Esc:: ; Press Escape to exit the script
+    ExitApp
+return
