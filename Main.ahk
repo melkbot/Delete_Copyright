@@ -13,7 +13,9 @@ Pause := false ; Variable to track pause state
         else
         {
             Click ; Perform a left mouse click
-            Send, {Delete} ; Press the Delete key
+            Sleep, 100 ; Add a small delay to avoid overwhelming the system
+            Send, {Backspace} ; Press the Backspace ke
+            Sleep, 100 ; Add a small delay to avoid overwhelming the system
             Send, {Right} ; Press the Right Arrow key
             Sleep, 100 ; Add a small delay to avoid overwhelming the system
         }
