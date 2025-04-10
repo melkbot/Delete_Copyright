@@ -1,38 +1,40 @@
-#NoEnv  ; Recommended for performance and compatibility with future AutoHotkey releases.
-SendMode Input  ; Recommended for new scripts due to its superior speed and reliability.
+#NoEnv
+SendMode Input
 
-MsgBox, Script is running! Press Ctrl+J to start, Ctrl+P to pause, and Esc to exit. ; Confirm script is running
+; Display a message box to confirm the script is running
+MsgBox, Script is running! Press Ctrl+J to start, Ctrl+P to pause, and Esc to exit.
 
-Pause := false ; Variable to track pause state
+Pause := false ; Variable to track the pause state
 
-^j:: ; Press Ctrl+J to start the loop
+; Start the loop when Ctrl+J is pressed
+^j::
     Loop
     {
-        if (Pause) ; Check if the script is paused
-            Sleep, 100 ; Wait while paused
+        if (Pause) ; If paused, wait and recheck
+            Sleep, 100
         else
         {
             Click ; Perform a left mouse click
-            Sleep, 100 ; Add a small delay to avoid overwhelming the system
+            Sleep, 100 ; Add a delay
+            if (Pause) ; Check pause state after delay
+                continue
+            Send, {Backspace} ; Simulate pressing Backspace
+            Sleep, 100 ; Add a delay
             if (Pause) ; Check pause state again
                 continue
-            Send, {Backspace} ; Press the Backspace key
-            Sleep, 100 ; Add a small delay to avoid overwhelming the system
-            if (Pause) ; Check pause state again
-                continue
-            Send, {Right} ; Press the Right Arrow key
-            Sleep, 100 ; Add a small delay to avoid overwhelming the system
+            Send, {Right} ; Simulate pressing the Right Arrow key
+            Sleep, 100 ; Add a delay
         }
     }
 return
 
-^p:: ; Press Ctrl+P to toggle pause
-    Pause := !Pause ; Toggle the pause state
-    ToolTip, % Pause ? "Paused" : "Running" ; Show tooltip indicating the state
-    Sleep, 1000
-    ToolTip ; Remove tooltip after 1 second
+; Toggle the pause state when Ctrl+P is pressed
+^p::
+    Pause := !Pause ; Switch between paused and running
+    ToolTip, % Pause ? "Paused" : "Running" ; Show the current state in a tooltip
+    Sleep, 1000 ; Display the tooltip for 1 second
+    ToolTip ; Clear the tooltip
 return
 
-Esc:: ; Press Escape to exit the script
-    ExitApp
-return
+; Exit the script when Esc is pressed
+Esc:: ExitApp
